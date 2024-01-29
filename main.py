@@ -3,7 +3,6 @@ import sys
 from ddpg.ddpg import DDPG
 from dqn.dqn import DQN
 from environment.gymnasium import (
-    CartpoleEnv,
     LunarLanderEnv,
     LunarLanderContinuousEnv,
     MountainCarContinuousEnv,
@@ -31,47 +30,44 @@ if __name__ == "__main__":
     episode_count = 10**100
     timestep_count = 10**100
 
-    # dqn_env = KeyboardTrackmania()
-    # # env = LunarLanderEnv()
-    # # dqn_env = MountainCarEnv()
+    dqn_env = LunarLanderEnv()
 
-    # create_dqn_agent = lambda chk=checkpoint_id, eps=episode_count, **kwargs: DQN(
-    #     environment=dqn_env,
-    #     episode_count=eps,
-    #     timestep_count=timestep_count,
-    #     gamma=0.99,
-    #     epsilon_start=0.9,
-    #     epsilon_min=0.01,
-    #     epsilon_decay=0.01,
-    #     buffer_batch_size=256,
-    #     checkpoint_id=chk,
-    #     **kwargs
-    # )
+    create_dqn_agent = lambda chk=checkpoint_id, eps=episode_count, **kwargs: DQN(
+        environment=dqn_env,
+        episode_count=eps,
+        timestep_count=timestep_count,
+        gamma=0.99,
+        epsilon_start=0.9,
+        epsilon_min=0.01,
+        epsilon_decay=0.01,
+        buffer_batch_size=256,
+        checkpoint_id=chk,
+        **kwargs
+    )
 
-    # for double_dqn in [False]:
-    #     for prioritised_replay in [True, False]:
-    #         agent = create_dqn_agent(
-    #             double_dqn=double_dqn,
-    #             prioritised_replay=prioritised_replay,
-    #             eps=400,
-    #         )
-    #         agent.train()
+    for double_dqn in [True, False]:
+        for prioritised_replay in [True, False]:
+            agent = create_dqn_agent(
+                double_dqn=double_dqn,
+                prioritised_replay=prioritised_replay,
+                eps=400,
+            )
+            agent.train()
 
-    # for polyak in [True, False]:
-    #     agent = create_dqn_agent(
-    #         polyak=polyak,
-    #         double_dqn=False,
-    #         prioritised_replay=False,
-    #         eps=400,
-    #     )
-    #     agent = agent.train()
+    for polyak in [True, False]:
+        agent = create_dqn_agent(
+            polyak=polyak,
+            double_dqn=False,
+            prioritised_replay=False,
+            eps=400,
+        )
+        agent = agent.train()
 
-    # for random in [True, False]:
-    #     agent = create_dqn_agent(random=random, eps=400)
-    #     agent = agent.train()
+    for random in [True, False]:
+        agent = create_dqn_agent(random=random, eps=400)
+        agent = agent.train()
 
-    # ddpg_env = MountainCarContinuousEnv(render=True)
-    ddpg_env = ControllerTrackmania()
+    ddpg_env = LunarLanderContinuousEnv()
     create_ddpg_agent = lambda chk=checkpoint_id, eps=episode_count, **kwargs: DDPG(
         environment=ddpg_env,
         episode_count=eps,

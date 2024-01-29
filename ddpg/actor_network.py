@@ -27,10 +27,8 @@ class ActorNetwork(NeuralNetwork):
             nn.ReLU(),
             nn.Linear(n, n),
             nn.ReLU(),
-            nn.Linear(n, n),
-            nn.ReLU(),
             nn.Linear(n, self.outputs),
-            nn.Sigmoid(),
+            nn.Tanh(),
         )
 
     def create_optim(self) -> Optimizer:

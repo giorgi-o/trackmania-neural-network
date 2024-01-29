@@ -43,8 +43,6 @@ class CriticNetwork(DqnNetwork):
             nn.ReLU(),
             nn.Linear(n, n),
             nn.ReLU(),
-            nn.Linear(n, n),
-            nn.ReLU(),
             nn.Linear(n, self.outputs),
         )
 
