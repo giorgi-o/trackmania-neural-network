@@ -4,9 +4,9 @@ A modular implementation of both the [DQN](https://en.wikipedia.org/wiki/Q-learn
 
 https://github.com/giorgi-o/trackmania-neural-network/assets/20621396/df6cebc3-6945-405b-877b-0d18ec008dd6
 
-The above video is after only a night of training on a simple map.
+The above video is after only a few hours of training on a simple map.
 
-DQN has a discrete action space, and as such uses keyboard input i.e. can go left, right or straight (no in-between).   
+DQN has a discrete action space, and as such, uses keyboard input i.e. can go left, right or straight (no in-between).   
 DDPG on the other hand uses analog input, and can control how sharply it turns.
 
 The algorithms are implemented modularly such that they can be used with any environment, including those from [OpenAI Gymnasium](https://gymnasium.farama.org/index.html). They were battle-tested on Cartpole, Pendulum, MountainCar (discrete + continuous) and Lunar Lander (discrete + continuous) before Trackmania.
